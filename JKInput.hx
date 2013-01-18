@@ -8,7 +8,7 @@ import nme.Lib;
 
 class JKInput extends JKObject
 {
-	public static var pressedKey : Null<Int>;
+	var pressedKey : Null<Int>;
 	var isKeyPressed : Bool = false;
 
 	public function new() 
@@ -32,23 +32,40 @@ class JKInput extends JKObject
 	function onKeyRelease( e : KeyboardEvent ) : Void
 	{
 		if ( isKeyPressed )				// Only do this if key is currently being pressed
+		{
 			isKeyPressed = false;		// Set flag
+			pressedKey = null;
+		}
+			
 	}
 	
-	public function getKeyboardPress() : Null<Int>
+	public function getPressedKey() : Null<Int>
+	{		
+		return pressedKey;		
+	}
+	
+	public function isAnyKeyPressed() : Bool
 	{
-		if ( !isKeyPressed )			
-			return pressedKey;
+		if ( pressedKey != null )
+			return true;
+			
+		return false;
+	}
+	
+	public function checkIfKeyPressed(toCheck : Int) : Bool
+	{
+		if ( pressedKey == toCheck )
+			return true;
 		else
-			return null;
+			return false;
 	}
 	
-	override private function LateUpdate():Dynamic 
-	{
-		super.LateUpdate();
-		
-		pressedKey = null;				// We reset the value for the next frame
-	}
+	//override private function LateUpdate():Dynamic 
+	//{
+		//super.LateUpdate();
+		//
+		//pressedKey = null;				// We reset the value for the next frame
+	//}
 	
 	
 }
