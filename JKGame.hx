@@ -10,7 +10,8 @@ class JKGame
 	
 	public function new() 
 	{
-		new JKInput();
+		new JKInput();		
+		new JKLayers();
 		
 		eventDispatcher = new EventDispatcher();		
 		InitializeLoopTimer();
@@ -18,8 +19,7 @@ class JKGame
 	
 	function InitializeLoopTimer()
 	{
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, GameLoop);	
-		//Lib.current.stage.addEventListener(Event.EXIT_FRAME, lateGameLoop);		
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, GameLoop);			
 	}
 	
 	function GameLoop(e: Event):Void
