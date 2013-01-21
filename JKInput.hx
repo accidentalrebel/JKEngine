@@ -83,9 +83,9 @@ class JKInput extends JKObject
 			return false;
 	}
 	
-	override private function LateUpdate():Dynamic 
+	override private function lateUpdate():Dynamic 
 	{
-		super.LateUpdate();		
+		super.lateUpdate();		
 		pressedKey = null;				// We reset the value for the next frame
 	}
 }

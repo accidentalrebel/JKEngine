@@ -32,9 +32,9 @@ class JKScene extends JKSprite
 		layer.removeChild(this);
 	}	
 	
-	override public function Destroy():Dynamic 
+	override public function destroy():Dynamic 
 	{
 		isShown = false;		
-		return super.Destroy();
+		return super.destroy();
 	}
 }

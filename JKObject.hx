@@ -15,27 +15,27 @@ class JKObject extends Sprite
 	
 	private function updateLoop(event:Event)
 	{		
-		Update();
+		update();
 	}
 	
 	private function lateUpdateLoop(event:Event)
 	{		
-		LateUpdate();
+		lateUpdate();
 	}	
 	
-	function Update()
+	function update()
 	{
 		// Intentionally left blank that can be overriden by children
 	}
 	
-	function LateUpdate()
+	function lateUpdate()
 	{
 		// Intentionally left blank that can be overriden by children
 	}
 	
-	public function Destroy()
+	public function destroy()
 	{		
-		Lib.current.stage.removeEventListener(JKEvent.LATE_UPDATE_LOOP, LateUpdateLoop);	// We remove the listener for update loop event
-		Lib.current.stage.removeEventListener(JKEvent.UPDATE_LOOP, UpdateLoop);				// We remove the listener for the late update loop event
+		Lib.current.stage.removeEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);	// We remove the listener for update loop event
+		Lib.current.stage.removeEventListener(JKEvent.UPDATE_LOOP, updateLoop);				// We remove the listener for the late update loop event
 	}
 }

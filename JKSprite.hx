@@ -47,9 +47,9 @@ class JKSprite extends JKObject
 		addChild(Graphic);	
 	}
 	
-	override private function Update():Dynamic 
+	override private function update():Dynamic 
 	{
-		super.Update();
+		super.update();
 		ApplyMovement();
 	}	
 	
@@ -62,9 +62,9 @@ class JKSprite extends JKObject
 			y += yAcceleration;
 	}
 	
-	override public function Destroy():Dynamic 
+	override public function destroy():Dynamic 
 	{					
 		layer.removeChild(this);
-		super.Destroy();
+		super.destroy();
 	}
 }
