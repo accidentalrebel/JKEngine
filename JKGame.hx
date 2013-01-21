@@ -10,16 +10,19 @@ class JKGame
 	
 	public function new() 
 	{
-		new JKInput();		
-		new JKLayers();
+		new JKInput();									// We automatically set up JKInput	
+		new JKLayers();									// We automatically set up the Layers
 		
-		eventDispatcher = new EventDispatcher();		
-		InitializeLoopTimer();
+		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
+		InitializeLoopTimer();							// We initialize the loop timer
 	}
 	
+	/**
+	 * Listens to enterFrame which constitutes the game loop
+	 */
 	function InitializeLoopTimer()
 	{
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, GameLoop);			
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, GameLoop);
 	}
 	
 	function GameLoop(e: Event):Void

@@ -23,7 +23,7 @@ class JK2DArray
 	 */
     public function get(xPos: Int, yPos: Int) 
     {
-		return array[xPos * pitch + yPos]; 
+		return array[yPos * pitch + xPos]; 
     }
 		
 	/**
