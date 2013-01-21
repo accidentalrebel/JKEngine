@@ -8,8 +8,6 @@ import nme.display.Sprite;
 
 class JKScene extends JKSprite
 {
-	var layer : DisplayObjectContainer;
-
 	public function new(?_layer : DisplayObjectContainer) 
 	{
 		super();

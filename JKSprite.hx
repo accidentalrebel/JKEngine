@@ -10,11 +10,14 @@ class JKSprite extends JKObject
 	var Graphic : Bitmap;
 	public var xAcceleration : Float = 0;
 	public var yAcceleration : Float = 0;
+	var layer : DisplayObjectContainer;
 	
 	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
-		, ?theHeight : Float, ?graphicFileLocation : String, ?layer : DisplayObjectContainer ) 
+		, ?theHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
 	{
 		super();
+		
+		layer = theLayer;
 		
 		// Set the positions
 		x = xPos;
@@ -61,7 +64,7 @@ class JKSprite extends JKObject
 	
 	override public function Destroy():Dynamic 
 	{					
-		Lib.stage.removeChild(this);
+		layer.removeChild(this);
 		super.Destroy();
 	}
 }

@@ -36,5 +36,6 @@ class JKObject extends Sprite
 	public function Destroy()
 	{
 		Lib.current.stage.removeEventListener(JKEvent.UPDATE_LOOP, UpdateLoop);
+		Lib.current.stage.removeEventListener(JKEvent.FIXED_UPDATE_LOOP, LateUpdateLoop);
 	}
 }
