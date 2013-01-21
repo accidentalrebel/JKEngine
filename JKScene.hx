@@ -8,6 +8,8 @@ import nme.display.Sprite;
 
 class JKScene extends JKSprite
 {
+	var isShown : Bool = false;
+	
 	public function new(?_layer : DisplayObjectContainer) 
 	{
 		super();
@@ -20,11 +22,13 @@ class JKScene extends JKSprite
 	
 	public function show()
 	{
+		isShown = true;
 		layer.addChild(this);
 	}
 	
 	public function hide()
 	{
+		isShown = false;
 		layer.removeChild(this);
 	}	
 }
