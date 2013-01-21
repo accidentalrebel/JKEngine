@@ -26,4 +26,29 @@ class JK2DArray
     { 
 		array[height * pitch + width] = toPut;
     }
+	
+	public function traceAllContent()
+	{
+		var xElementCount : Int = 1;
+		var i : Int = 0;
+		var toDisplay : String = "\n";
+		for ( element in array )
+		{
+			if ( element == null )
+				toDisplay += "N";
+			else
+				toDisplay += "1";
+			
+			if ( xElementCount >= pitch )
+			{
+				xElementCount = 0;
+				toDisplay += "\n";
+			}
+			
+			xElementCount ++;
+			i++;
+		}
+		
+		trace(toDisplay);
+	}	
 }
