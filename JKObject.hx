@@ -10,7 +10,7 @@ class JKObject extends Sprite
 	{
 		super();	
 		Lib.current.stage.addEventListener(JKEvent.UPDATE_LOOP, UpdateLoop);
-		Lib.current.stage.addEventListener(JKEvent.FIXED_UPDATE_LOOP, LateUpdateLoop);
+		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, LateUpdateLoop);
 	}
 	
 	private function UpdateLoop(event:Event)
@@ -35,7 +35,7 @@ class JKObject extends Sprite
 	
 	public function Destroy()
 	{		
-		Lib.current.stage.removeEventListener(JKEvent.FIXED_UPDATE_LOOP, LateUpdateLoop);
+		Lib.current.stage.removeEventListener(JKEvent.LATE_UPDATE_LOOP, LateUpdateLoop);
 		Lib.current.stage.removeEventListener(JKEvent.UPDATE_LOOP, UpdateLoop);
 	}
 }

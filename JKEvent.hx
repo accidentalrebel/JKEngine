@@ -5,7 +5,7 @@ import nme.events.Event;
 class JKEvent extends Event
 {
 	public inline static var UPDATE_LOOP : String = "update";
-	public inline static var FIXED_UPDATE_LOOP : String = "fixedUpdate";
+	public inline static var LATE_UPDATE_LOOP : String = "fixedUpdate";
 	
 	public function new(type : String, bubbles : Bool = false, cancelable : Bool = false) : Void
 	{

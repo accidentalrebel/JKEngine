@@ -22,17 +22,17 @@ class JKGame
 	 */
 	function InitializeLoopTimer()
 	{
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, GameLoop);
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);		
 	}
 	
-	function GameLoop(e: Event):Void
+	function update(e: Event):Void
 	{			
-		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.UPDATE_LOOP));
-		lateGameLoop();
+		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.UPDATE_LOOP));			// We dispatch an updateLoop event
+		lateUpdate();																// Once the update has finished, we call the lateUpdate
 	}
 	
-	function lateGameLoop() : Void
+	function lateUpdate() : Void
 	{
-		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.FIXED_UPDATE_LOOP));
+		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.LATE_UPDATE_LOOP));		// We dispatch lateUpdate loop event
 	}
 }
