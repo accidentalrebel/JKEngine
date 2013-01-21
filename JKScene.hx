@@ -6,7 +6,7 @@ import nme.display.Sprite;
  * @author Karlo
  */
 
-class JKScene extends Sprite
+class JKScene extends JKSprite
 {
 	var layer : DisplayObjectContainer;
 
@@ -15,7 +15,9 @@ class JKScene extends Sprite
 		super();
 		
 		layer = _layer;		
-		show();
+		
+		layer.addChild(this);
+		hide();
 	}
 	
 	public function show()
