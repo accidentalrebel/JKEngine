@@ -7,6 +7,7 @@ import nme.Lib;
  
 class JKSprite extends JKObject
 {		
+	public var isShown : Bool = false;
 	var Graphic : Bitmap;
 	public var xAcceleration : Float = 0;
 	public var yAcceleration : Float = 0;
@@ -62,8 +63,21 @@ class JKSprite extends JKObject
 			y += yAcceleration;
 	}
 	
+	public function show()
+	{
+		isShown = true;
+		layer.addChild(this);
+	}
+	
+	public function hide()
+	{
+		isShown = false;
+		layer.removeChild(this);
+	}	
+	
 	override public function destroy():Dynamic 
-	{					
+	{		
+		isShown = false;
 		layer.removeChild(this);
 		super.destroy();
 	}
