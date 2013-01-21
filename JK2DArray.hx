@@ -18,12 +18,12 @@ class JK2DArray
     } 
 
     public function get(width: Int, height: Int) 
-    { 
+    {
 		return array[height * pitch + width]; 
     }
 	
 	public function set(toPut : Dynamic, width: Int, height: Int) 
     { 
-		array[height * pitch + width] = toPut; 
+		array[height * pitch + width] = toPut;
     }
 }
