@@ -16,36 +16,52 @@ class JKInput extends JKObject
 		super();
 		pressedKey = null;
 		
-		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);			// We listen to a KEY_DOWN event
+		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event
 	}
 	
+	/**
+	 * Handles what happens when a keyboard key is pressed
+	 * @param	e
+	 */
 	function onKeyPress (e : KeyboardEvent) : Void
 	{	
-		if ( !isKeyPressed )			// Only do this if no key is currently being pressed
+		if ( !isKeyPressed )										// Only do this if no key is currently being pressed
 		{
-			pressedKey = e.keyCode;		// We save the pressed Key
-			isKeyPressed = true;		// Set flag
+			pressedKey = e.keyCode;									// We save the pressed Key
+			isKeyPressed = true;									// Set flag
 		}
 	}
 	
+	/**
+	 * Handles what happens when a keyboard key is released
+	 * @param	e
+	 */
 	function onKeyRelease( e : KeyboardEvent ) : Void
 	{
-		if ( isKeyPressed )				// Only do this if key is currently being pressed
+		if ( isKeyPressed )											// Only do this if key is currently being pressed
 		{
-			if ( e.keyCode == pressedKey )
+			if ( e.keyCode == pressedKey )							// Make sure that the released key is the currentKey pressed	
 			{				
-				pressedKey = null;
+				pressedKey = null;									// We set the pressedKey to null
 			}
-			isKeyPressed = false;		// Set flag
+			isKeyPressed = false;									// Set flag
 		}	
 	}
 	
+	/**
+	 * Returns the currently pressed key
+	 * @return	Currently pressed key
+	 */
 	public function getPressedKey() : Null<Int>
 	{		
 		return pressedKey;		
 	}
 	
+	/**
+	 * Checks if there is a key that is currently pressed for this frame
+	 * @return	True if a key is pressed. Otherwise, false
+	 */
 	public function isAnyKeyPressed() : Bool
 	{
 		if ( pressedKey != null )
@@ -54,6 +70,11 @@ class JKInput extends JKObject
 		return false;
 	}
 	
+	/**
+	 * Checks if a specified key is pressed for this frame
+	 * @param	toCheck		The key to check
+	 * @return	True if the key is pressed. Otherwise, false
+	 */
 	public function checkIfKeyPressed(toCheck : Int) : Bool
 	{
 		if ( pressedKey == toCheck )
@@ -64,8 +85,7 @@ class JKInput extends JKObject
 	
 	override private function LateUpdate():Dynamic 
 	{
-		super.LateUpdate();
-		
+		super.LateUpdate();		
 		pressedKey = null;				// We reset the value for the next frame
 	}
 }
