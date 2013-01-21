@@ -33,8 +33,11 @@ class JKInput extends JKObject
 	{
 		if ( isKeyPressed )				// Only do this if key is currently being pressed
 		{
+			if ( e.keyCode == pressedKey )
+			{				
+				pressedKey = null;
+			}
 			isKeyPressed = false;		// Set flag
-			pressedKey = null;
 		}	
 	}
 	
