@@ -35,8 +35,7 @@ class JKInput extends JKObject
 		{
 			isKeyPressed = false;		// Set flag
 			pressedKey = null;
-		}
-			
+		}	
 	}
 	
 	public function getPressedKey() : Null<Int>

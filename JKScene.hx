@@ -8,7 +8,7 @@ import nme.display.Sprite;
 
 class JKScene extends JKSprite
 {
-	var isShown : Bool = false;
+	public var isShown : Bool = false;
 	
 	public function new(?_layer : DisplayObjectContainer) 
 	{
@@ -31,4 +31,10 @@ class JKScene extends JKSprite
 		isShown = false;
 		layer.removeChild(this);
 	}	
+	
+	override public function Destroy():Dynamic 
+	{
+		isShown = false;		
+		return super.Destroy();
+	}
 }

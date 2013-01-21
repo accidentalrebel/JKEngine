@@ -4,6 +4,7 @@ import nme.display.DisplayObjectContainer;
 import nme.Lib;
 import nme.text.TextFieldType;
 import nme.text.TextFormat;
+import nme.text.TextFormatAlign;
 
 /**
  * ...
@@ -16,7 +17,7 @@ class JKText extends TextField
 	
 	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
 		, ?theHeight : Float, ?theText : String, theTextColor : Int = 0x000000
-		, fontSize : Int = 10, fontType : String, ?layer : DisplayObjectContainer ) 
+		, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?layer : DisplayObjectContainer ) 
 	{
 		super();
 						
@@ -37,6 +38,9 @@ class JKText extends TextField
 		textFormat = new TextFormat();		
 		textColor = theTextColor;	
 		
+		if ( alignment != null )		
+			textFormat.align = alignment;		
+			
 		textFormat.size = fontSize;	
 		textFormat.font = fontType;
 		
