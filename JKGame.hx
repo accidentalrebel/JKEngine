@@ -15,6 +15,13 @@ class JKGame
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
 		InitializeLoopTimer();							// We initialize the loop timer
+		
+		start();
+	}
+	
+	function start()
+	{
+		// Intentionally left blank that can be overriden by children		
 	}
 	
 	/**
