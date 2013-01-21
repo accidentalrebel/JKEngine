@@ -9,12 +9,30 @@ class JK2DArray
 {
 	var pitch: Int; 
 	var array : Array<Dynamic>;
+	var width : Int;
+	var height : Int;
 	
-    public function new(width: Int, height: Int) 
+    public function new(_width: Int, _height: Int, ?toPopulateWith : Dynamic) 
     { 
 		array = new Array<Dynamic>();		 
-		pitch = width;
-    } 
+		width = _width;
+		height = _height;
+		pitch = _width;
+		
+		populate(toPopulateWith);
+		traceAllContent();
+    }
+	
+	public function populate(?toPopulateWith : Dynamic)
+	{
+		for ( i in 0...width )
+		{
+			for ( j in 0...height )
+			{
+				set(toPopulateWith, i, j);								
+			}
+		}
+	}
 
 	/**
 	 * Get's the content of the array at the x and y positions
