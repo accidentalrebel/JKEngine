@@ -19,8 +19,7 @@ class JK2DArray
 		height = _height;
 		pitch = _width;
 		
-		populate(toPopulateWith);
-		traceAllContent();
+		populate(toPopulateWith);		
     }
 	
 	public function populate(?toPopulateWith : Dynamic)
@@ -29,7 +28,7 @@ class JK2DArray
 		{
 			for ( j in 0...height )
 			{
-				set(toPopulateWith, i, j);								
+				set(toPopulateWith, i, j);
 			}
 		}
 	}
