@@ -76,7 +76,8 @@ class JKSprite extends JKObject
 	public function show()
 	{
 		isShown = true;
-		layer.addChild(this);
+		alpha = 1;
+		//layer.addChild(this);
 	}
 	
 	/**
@@ -85,7 +86,8 @@ class JKSprite extends JKObject
 	public function hide()
 	{
 		isShown = false;
-		layer.removeChild(this);
+		alpha = 0;
+		// layer.removeChild(this);
 	}	
 	
 	override public function destroy():Dynamic 
