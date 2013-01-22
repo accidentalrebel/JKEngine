@@ -89,7 +89,7 @@ class JKKeyboard extends JKObject
 	override private function lateUpdate():Dynamic 
 	{
 		super.lateUpdate();		
-		pressedKey = null;				// We reset the value for the next frame
+		//pressedKey = null;				// We reset the value for the next frame
 		isMousePressed = false;
 	}
 }

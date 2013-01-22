@@ -34,4 +34,9 @@ class JKButton extends JKSprite
 		}		
 	}
 	
+	override private function lateUpdate():Dynamic 
+	{
+		isClicked = false;
+		super.lateUpdate();
+	}	
 }

@@ -26,13 +26,14 @@ class JKMouse extends JKObject
 	
 	function onMouseDown(e : MouseEvent)
 	{		
-		isMousePressed = true;
+		isMousePressed = true;		
 	}
 	
 	function onMouseMove(e : MouseEvent )
 	{
 		position.x = e.stageX;
 		position.y = e.stageY;
+		
 	}
 	
 	public function justPressed() : Bool
