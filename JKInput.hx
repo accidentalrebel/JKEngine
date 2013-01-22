@@ -1,5 +1,7 @@
 package jkEngine;
+import browser.filters.ConvolutionFilter;
 import nme.events.KeyboardEvent;
+import nme.events.MouseEvent;
 import nme.Lib;
 /**
  * ...
@@ -9,7 +11,10 @@ import nme.Lib;
 class JKInput extends JKObject
 {
 	var pressedKey : Null<Int>;
-	var isKeyPressed : Bool = false;
+	var isMousePressed : Bool;
+	public var xMouse : Float;
+	public var yMouse : Float;
+	var isKeyPressed : Bool = false;	
 
 	public function new() 
 	{
@@ -18,6 +23,7 @@ class JKInput extends JKObject
 		
 		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);			// We listen to a KEY_DOWN event
 		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event
+		Lib.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);			// WE listen to a KEY_UP event
 	}
 	
 	/**
@@ -47,6 +53,22 @@ class JKInput extends JKObject
 			}
 			isKeyPressed = false;									// Set flag
 		}	
+	}
+	
+	/**
+	 * What happens when a mouse key is pressed
+	 * @param	e
+	 */
+	function onMouseDown( e : MouseEvent ) : Void
+	{
+		xMouse = e.stageX;
+		yMouse = e.stageY;
+		isMousePressed = e.buttonDown;
+	}
+	
+	public function getMouseDown() : Bool
+	{
+		return isMousePressed;
 	}
 	
 	/**
@@ -87,5 +109,6 @@ class JKInput extends JKObject
 	{
 		super.lateUpdate();		
 		pressedKey = null;				// We reset the value for the next frame
+		isMousePressed = false;
 	}
 }

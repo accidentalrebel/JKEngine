@@ -7,10 +7,11 @@ import nme.events.EventDispatcher;
 class JKGame
 {
 	var eventDispatcher : EventDispatcher;
+	public var inputHandler : JKInput;
 	
 	public function new() 
 	{
-		new JKInput();									// We automatically set up JKInput	
+		inputHandler = new JKInput();									// We automatically set up JKInput	
 		new JKLayers();									// We automatically set up the Layers
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
