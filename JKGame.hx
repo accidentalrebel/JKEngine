@@ -14,14 +14,7 @@ class JKGame
 		new JKLayers();									// We automatically set up the Layers
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
-		InitializeLoopTimer();							// We initialize the loop timer
-		
-		start();
-	}
-	
-	function start()
-	{
-		// Intentionally left blank that can be overriden by children		
+		InitializeLoopTimer();							// We initialize the loop timer		
 	}
 	
 	/**

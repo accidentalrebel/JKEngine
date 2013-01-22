@@ -11,8 +11,6 @@ class JKObject extends Sprite
 		super();	
 		Lib.current.stage.addEventListener(JKEvent.UPDATE_LOOP, updateLoop);				// We listen for an update loop event
 		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event
-		
-		start();
 	}
 	
 	private function updateLoop(event:Event)
@@ -24,11 +22,6 @@ class JKObject extends Sprite
 	{		
 		lateUpdate();
 	}	
-	
-	function start()
-	{
-		// Intentionally left blank that can be overriden by children		
-	}
 	
 	function update()
 	{
