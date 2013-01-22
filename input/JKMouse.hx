@@ -43,8 +43,6 @@ class JKMouse extends JKObject
 	override private function update():Dynamic 
 	{
 		super.update();
-		
-		
 	}
 	
 	override private function lateUpdate():Dynamic 
