@@ -7,11 +7,10 @@ package jkengine;
 
 class JKPoint 
 {
-
-	public var x : Dynamic;
-	public var y : Dynamic;
+	public var x : Float;
+	public var y : Float;
 	
-	public function new(X : Dynamic = 0, Y:Dynamic = 0) 
+	public function new(X : Float = 0, Y:Float = 0) 
 	{
 		x = X;
 		y = Y;

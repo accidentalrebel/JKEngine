@@ -1,5 +1,6 @@
 package jkEngine;
 
+import jkEngine.input.JKMouse;
 import nme.Lib;
 import nme.events.Event;
 import nme.events.EventDispatcher;
@@ -9,10 +10,12 @@ class JKGame
 {
 	var eventDispatcher : EventDispatcher;
 	public var keyboard : JKKeyboard;
+	public var mouse : JKMouse;
 	
 	public function new() 
 	{
-		keyboard = new JKKeyboard();									// We automatically set up JKInput	
+		keyboard = new JKKeyboard();					// We set up the keyboard
+		mouse = new JKMouse();							// We set up the mouse
 		new JKLayers();									// We automatically set up the Layers
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
