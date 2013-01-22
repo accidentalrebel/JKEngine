@@ -1,5 +1,4 @@
-package jkEngine;
-import browser.filters.ConvolutionFilter;
+package jkEngine.input;
 import nme.events.KeyboardEvent;
 import nme.events.MouseEvent;
 import nme.Lib;
@@ -8,7 +7,7 @@ import nme.Lib;
  * @author Karlo
  */
 
-class JKInput extends JKObject
+class JKKeyboard extends JKObject
 {
 	var pressedKey : Null<Int>;
 	var isMousePressed : Bool;

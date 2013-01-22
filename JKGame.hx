@@ -3,15 +3,16 @@ package jkEngine;
 import nme.Lib;
 import nme.events.Event;
 import nme.events.EventDispatcher;
+import jkEngine.input.JKKeyboard;
 
 class JKGame
 {
 	var eventDispatcher : EventDispatcher;
-	public var inputHandler : JKInput;
+	public var keyboard : JKKeyboard;
 	
 	public function new() 
 	{
-		inputHandler = new JKInput();									// We automatically set up JKInput	
+		keyboard = new JKKeyboard();									// We automatically set up JKInput	
 		new JKLayers();									// We automatically set up the Layers
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
