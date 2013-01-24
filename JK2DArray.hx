@@ -5,18 +5,20 @@ package jkEngine;
  * @author Karlo
  */
 
-class JK2DArray
+class JK2DArray extends JKSprite
 {
 	var pitch: Int; 
 	var array : Array<Dynamic>;
-	var width : Int;
-	var height : Int;
+	var arrayWidth : Int;
+	var arrayHeight : Int;
 	
     public function new(_width: Int, _height: Int, ?toPopulateWith : Dynamic) 
     { 
+		super();
+		
 		array = new Array<Dynamic>();		 
-		width = _width;
-		height = _height;
+		arrayWidth = _width;
+		arrayHeight = _height;
 		pitch = _width;
 		
 		populate(toPopulateWith);		
@@ -24,9 +26,9 @@ class JK2DArray
 	
 	public function populate(?toPopulateWith : Dynamic)
 	{
-		for ( i in 0...width )
+		for ( i in 0...arrayWidth )
 		{
-			for ( j in 0...height )
+			for ( j in 0...arrayHeight )
 			{
 				set(toPopulateWith, i, j);
 			}
