@@ -13,6 +13,9 @@ class JKSprite extends JKObject
 	var layer : DisplayObjectContainer;
 	var Graphic : Bitmap;
 	
+	/********************************************************************************
+	 * MAIN
+	 * ******************************************************************************/
 	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
 		, ?theHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
 	{
@@ -32,7 +35,7 @@ class JKSprite extends JKObject
 			height = theHeight;
 			
 		// Set the graphic
-		if ( graphicFileLocation != null )
+		if ( graphicFileLocation != null)
 			loadGraphic(graphicFileLocation);
 				
 		// Setting of layer
@@ -42,6 +45,15 @@ class JKSprite extends JKObject
 		layer.addChild(this);									// We add this object to layer
 	}
 	
+	override private function update():Dynamic 
+	{
+		super.update();
+		ApplyMovement();
+	}	
+	
+	/********************************************************************************
+	 * GRAPHIC
+	 * ******************************************************************************/
 	/**
 	 * Loads the graphic from a specified file location and adds it to this object
 	 * @param	fileLocation	The file location to load the graphic from
@@ -52,12 +64,9 @@ class JKSprite extends JKObject
 		addChild(Graphic);										// We add the graphic to this object					
 	}
 	
-	override private function update():Dynamic 
-	{
-		super.update();
-		ApplyMovement();
-	}	
-	
+	/********************************************************************************
+	 * MOVEMENT
+	 * ******************************************************************************/	
 	/**
 	 * Applies movement changes
 	 */
@@ -70,6 +79,9 @@ class JKSprite extends JKObject
 			y += yAcceleration;
 	}
 	
+	/********************************************************************************
+	 * VISIBILITY
+	 * ******************************************************************************/	
 	/**
 	 * Shows this object by adding it to the layer
 	 */
@@ -90,6 +102,9 @@ class JKSprite extends JKObject
 		// layer.removeChild(this);
 	}	
 	
+	/********************************************************************************
+	 * DESTROY
+	 * ******************************************************************************/
 	override public function destroy():Dynamic 
 	{		
 		isShown = false;									// We unshow the object

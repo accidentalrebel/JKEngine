@@ -6,6 +6,8 @@ package jkEngine;
  
 class JKObject extends Sprite
 {			
+	public var objectName : String;
+	
 	public function new() 
 	{
 		super();	

@@ -9,8 +9,8 @@ class JK2DArray extends JKSprite
 {
 	var pitch: Int; 
 	var array : Array<Dynamic>;
-	var arrayWidth : Int;
-	var arrayHeight : Int;
+	public var arrayWidth : Int;
+	public var arrayHeight : Int;
 	
     public function new(_width: Int, _height: Int, ?toPopulateWith : Dynamic) 
     { 
