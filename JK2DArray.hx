@@ -59,7 +59,7 @@ class JK2DArray extends JKSprite
 	/**
 	 * Displays the content of the whole array using trace()
 	 */
-	public function traceAllContent()
+	public function displayAllContent()
 	{
 		var xElementCount : Int = 1;
 		var i : Int = 0;
