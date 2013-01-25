@@ -17,8 +17,7 @@ class JKGame
 	public function new() 
 	{
 		keyboard = new JKKeyboard();					// We set up the keyboard
-		mouse = new JKMouse();							// We set up the mouse
-		new JKLayers();									// We automatically set up the Layers
+		mouse = new JKMouse();							// We set up the mouse		
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
 		InitializeLoopTimer();							// We initialize the loop timer	
