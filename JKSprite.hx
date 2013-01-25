@@ -23,6 +23,8 @@ class JKSprite extends JKObject
 	var isAnimated : Bool;
 	var lastAnimationFrame : Float;
 	var currentAnimation : String;
+	var currentAnimationSet : Array<Int>;
+	var currentFrame : Int = 0;
 	
 	/********************************************************************************
 	 * MAIN
@@ -89,10 +91,10 @@ class JKSprite extends JKObject
 		addChild(spriteGraphic);										// We add the graphic to this object					
 	}
 	
-	//function setScrollRect( newRect : Rectangle )
-	//{
-		//spriteGraphic.scrollRect = newRect;
-	//}
+	function updateGraphicRect()
+	{
+		spriteGraphic.scrollRect = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
+	}
 	
 	/********************************************************************************
 	 * MOVEMENT
@@ -153,8 +155,13 @@ class JKSprite extends JKObject
 			return;
 			
 		if ( Lib.getTimer() - lastAnimationFrame > 1000 )
-		{
-			trace("firing");
+		{			
+			currentFrame++;
+			if ( currentFrame >= currentAnimationSet.length )
+				currentFrame = 0;
+						
+			currentAnimationSet[currentFrame];
+			updateGraphicRect();
 			lastAnimationFrame = Lib.getTimer();
 		}
 	}
@@ -162,8 +169,9 @@ class JKSprite extends JKObject
 	public function play(animationToPlay : String)
 	{
 		currentAnimation = animationToPlay;		
+		currentAnimationSet = animationList.get(animationToPlay);
 		canPlayAnimation = true;
-		lastAnimationFrame = Lib.getTimer();
+		lastAnimationFrame = Lib.getTimer();		
 	}
 	
 	public function stop()
