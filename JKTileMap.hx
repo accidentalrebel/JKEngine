@@ -19,7 +19,7 @@ class JKTileMap extends JK2DArray
 		for ( i in 0...arrayWidth )
 		{
 			for ( j in 0...arrayHeight )
-			{					
+			{	
 				set(new JKTile(i, j), i, j);
 			}
 		}
