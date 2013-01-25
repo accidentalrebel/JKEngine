@@ -31,11 +31,11 @@ class JKTileMap extends JK2DArray
 	
 	public function loadMap(MapData: String)
 	{
-		for ( i in 0...arrayWidth )
+		for ( j in 0...arrayHeight )
 		{
-			for ( j in 0...arrayHeight )
+			for ( i in 0...arrayWidth )
 			{	
-				set(new JKTile(i, j, 40, 40, "img/mapTiles.png", theLayer, Std.parseInt(MapData.charAt(( j * arrayHeight ) + i ))), i, j);
+				set(new Tile(i, j, 40, 40, "img/mapTiles.png", theLayer, Std.parseInt(MapData.charAt(( j * arrayWidth ) + i ))), i, j);
 			}
 		}
 	}
