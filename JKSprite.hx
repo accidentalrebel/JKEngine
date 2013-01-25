@@ -115,6 +115,7 @@ class JKSprite extends JKObject
 	override public function destroy():Dynamic 
 	{		
 		isShown = false;									// We unshow the object
+		removeChild(Graphic);
 		layer.removeChild(this);							// We remove the object from its layer
 		super.destroy();									// We then start destroying
 	}
