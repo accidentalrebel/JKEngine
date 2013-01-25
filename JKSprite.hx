@@ -7,6 +7,20 @@ import nme.geom.Rectangle;
 import nme.Lib;
 import nme.utils.Timer;
  
+class AnimSet
+{
+	public var animName : String;
+	public var animFrames : Array<Int>;
+	public var animSpeed : Float;
+
+	public function new(AnimName : String, AnimFrames : Array<Int>, AnimSpeed : Float)
+	{
+		animName = AnimName;
+		animFrames = AnimFrames;
+		animSpeed = AnimSpeed;
+	}
+}
+
 class JKSprite extends JKObject
 {		
 	public var isShown : Bool = false;	
@@ -15,15 +29,14 @@ class JKSprite extends JKObject
 	private var frameWidth : Null<Float>;
 	private var frameHeight : Null<Float>;
 		
-	var animationList : Hash<Array<Int>>;
+	var animationList : Hash<AnimSet>;
 	var canPlayAnimation : Bool = false;
 	var layer : DisplayObjectContainer;
 	var spriteGraphic : Bitmap;
 	
 	var isAnimated : Bool;
 	var lastAnimationFrame : Float;
-	var currentAnimation : String;
-	var currentAnimationSet : Array<Int>;
+	var currentAnimationSet : AnimSet;
 	var currentFrame : Int = 0;
 	
 	/********************************************************************************
@@ -57,7 +70,7 @@ class JKSprite extends JKObject
 		isAnimated = IsAnimated;		
 		if ( isAnimated )
 		{
-			animationList = new Hash<Array<Int>>();			
+			animationList = new Hash<AnimSet>();			
 		}
 	}
 	
@@ -137,7 +150,7 @@ class JKSprite extends JKObject
 	/********************************************************************************
 	 * ANIMATION
 	 * ******************************************************************************/
-	public function addAnimation( AnimName : String, Frames : Array<Int>, FrameRate : Float = 0, Looped : Bool = true ) : Void
+	public function addAnimation( AnimName : String, Frames : Array<Int>, AnimationSpeed : Float = 0, Looped : Bool = true ) : Void
 	{
 		if ( !isAnimated )
 		{
@@ -145,8 +158,7 @@ class JKSprite extends JKObject
 			return;
 		}
 		
-		animationList.set(AnimName, Frames);
-		trace(animationList.get(AnimName));
+		animationList.set(AnimName, new AnimSet(AnimName, Frames, AnimationSpeed));
 	}
 	
 	public function applyAnimation()
@@ -154,13 +166,13 @@ class JKSprite extends JKObject
 		if ( !canPlayAnimation )
 			return;
 			
-		if ( Lib.getTimer() - lastAnimationFrame > 1000 )
+		if ( Lib.getTimer() - lastAnimationFrame > currentAnimationSet.animSpeed )
 		{			
 			currentFrame++;
-			if ( currentFrame >= currentAnimationSet.length )
+			if ( currentFrame >= currentAnimationSet.animFrames.length )
 				currentFrame = 0;
 						
-			currentAnimationSet[currentFrame];
+			currentAnimationSet.animFrames[currentFrame];
 			updateGraphicRect();
 			lastAnimationFrame = Lib.getTimer();
 		}
@@ -168,7 +180,6 @@ class JKSprite extends JKObject
 	
 	public function play(animationToPlay : String)
 	{
-		currentAnimation = animationToPlay;		
 		currentAnimationSet = animationList.get(animationToPlay);
 		canPlayAnimation = true;
 		lastAnimationFrame = Lib.getTimer();		
