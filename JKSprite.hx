@@ -3,6 +3,7 @@ package jkEngine;
 import nme.display.DisplayObjectContainer;
 import nme.display.Bitmap;
 import nme.events.Event;
+import nme.geom.Rectangle;
 import nme.Lib;
  
 class JKSprite extends JKObject
@@ -10,29 +11,27 @@ class JKSprite extends JKObject
 	public var isShown : Bool = false;	
 	public var xAcceleration : Float = 0;
 	public var yAcceleration : Float = 0;
+	var frameWidth : Null<Float>;
+	var frameHeight : Null<Float>;
 	var layer : DisplayObjectContainer;
 	var Graphic : Bitmap;
 	
 	/********************************************************************************
 	 * MAIN
 	 * ******************************************************************************/
-	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
-		, ?theHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
+	public function new( xPos : Float = 0, yPos : Float = 0, ?FrameWidth : Float
+		, ?FrameHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
 	{
 		super();
 		
 		layer = theLayer;										// We save the layer
+				
+		frameWidth = FrameWidth;
+		frameHeight = FrameHeight;
 		
 		// Set the positions
 		x = xPos;
 		y = yPos;
-		
-		// Set the dimensions
-		if ( theWidth != null )
-			width = theWidth;
-			
-		if ( theHeight != null )
-			height = theHeight;
 			
 		// Set the graphic
 		if ( graphicFileLocation != null)
@@ -58,9 +57,17 @@ class JKSprite extends JKObject
 	 * Loads the graphic from a specified file location and adds it to this object
 	 * @param	fileLocation	The file location to load the graphic from
 	 */
-	function loadGraphic(fileLocation : String)
+	function loadGraphic(fileLocation : String )
 	{				
 		Graphic = new Bitmap(ApplicationMain.getAsset(fileLocation));	// We load the bitmap from the file location
+		
+		// Set the frameWidth and Height
+		if ( frameWidth == null )
+			frameWidth = Graphic.width;
+		if ( frameHeight == null )
+			frameHeight = Graphic.height;
+		
+		Graphic.scrollRect = new Rectangle(0, 0, frameWidth, frameHeight);
 		addChild(Graphic);										// We add the graphic to this object					
 	}
 	

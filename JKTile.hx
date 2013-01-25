@@ -29,7 +29,7 @@ class JKTile extends JKSprite
 		yCoord = Y;
 		
 		x = xCoord * width;
-		y = yCoord * height;
+		y = yCoord * height;		
 	}
 	
 	public function getXCoord() : Int
