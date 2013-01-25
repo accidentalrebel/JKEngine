@@ -5,6 +5,7 @@ import nme.display.Bitmap;
 import nme.events.Event;
 import nme.geom.Rectangle;
 import nme.Lib;
+import nme.utils.Timer;
  
 class JKSprite extends JKObject
 {		
@@ -15,9 +16,13 @@ class JKSprite extends JKObject
 	private var frameHeight : Null<Float>;
 		
 	var animationList : Hash<Array<Int>>;
+	var canPlayAnimation : Bool = false;
 	var layer : DisplayObjectContainer;
-	var Graphic : Bitmap;
+	var spriteGraphic : Bitmap;
+	
 	var isAnimated : Bool;
+	var lastAnimationFrame : Float;
+	var currentAnimation : String;
 	
 	/********************************************************************************
 	 * MAIN
@@ -25,10 +30,6 @@ class JKSprite extends JKObject
 	public function new( xPos : Float = 0, yPos : Float = 0, ?FrameWidth : Float
 		, ?FrameHeight : Float, ?graphicFileLocation : String, IsAnimated : Bool = false, ?theLayer : DisplayObjectContainer ) 
 	{
-		isAnimated = IsAnimated;		
-		if ( isAnimated )
-			animationList = new Hash<Array<Int>>();
-		
 		super();
 				
 		layer = theLayer;										// We save the layer
@@ -49,12 +50,22 @@ class JKSprite extends JKObject
 			layer = Lib.stage;	
 			
 		layer.addChild(this);									// We add this object to layer
+		
+		// We set up the animation
+		isAnimated = IsAnimated;		
+		if ( isAnimated )
+		{
+			animationList = new Hash<Array<Int>>();			
+		}
 	}
 	
 	override private function update():Dynamic 
 	{
 		super.update();
 		ApplyMovement();
+		
+		if ( isAnimated && canPlayAnimation )
+			applyAnimation();
 	}	
 	
 	/********************************************************************************
@@ -66,17 +77,22 @@ class JKSprite extends JKObject
 	 */
 	function loadGraphic(fileLocation : String )
 	{				
-		Graphic = new Bitmap(ApplicationMain.getAsset(fileLocation));	// We load the bitmap from the file location
+		spriteGraphic = new Bitmap(ApplicationMain.getAsset(fileLocation));	// We load the bitmap from the file location
 		
 		// Set the frameWidth and Height
 		if ( frameWidth == null )
-			frameWidth = Graphic.width;
+			frameWidth = spriteGraphic.width;
 		if ( frameHeight == null )
-			frameHeight = Graphic.height;
+			frameHeight = spriteGraphic.height;
 		
-		Graphic.scrollRect = new Rectangle(0, 0, frameWidth, frameHeight);
-		addChild(Graphic);										// We add the graphic to this object					
+		spriteGraphic.scrollRect = new Rectangle(0, 0, frameWidth, frameHeight);
+		addChild(spriteGraphic);										// We add the graphic to this object					
 	}
+	
+	//function setScrollRect( newRect : Rectangle )
+	//{
+		//spriteGraphic.scrollRect = newRect;
+	//}
 	
 	/********************************************************************************
 	 * MOVEMENT
@@ -131,13 +147,37 @@ class JKSprite extends JKObject
 		trace(animationList.get(AnimName));
 	}
 	
+	public function applyAnimation()
+	{
+		if ( !canPlayAnimation )
+			return;
+			
+		if ( Lib.getTimer() - lastAnimationFrame > 1000 )
+		{
+			trace("firing");
+			lastAnimationFrame = Lib.getTimer();
+		}
+	}
+	
+	public function play(animationToPlay : String)
+	{
+		currentAnimation = animationToPlay;		
+		canPlayAnimation = true;
+		lastAnimationFrame = Lib.getTimer();
+	}
+	
+	public function stop()
+	{
+		canPlayAnimation = false;
+	}
+	
 	/********************************************************************************
 	 * DESTROY
 	 * ******************************************************************************/
 	override public function destroy():Dynamic 
 	{		
 		isShown = false;									// We unshow the object
-		removeChild(Graphic);
+		removeChild(spriteGraphic);
 		layer.removeChild(this);							// We remove the object from its layer
 		super.destroy();									// We then start destroying
 	}
