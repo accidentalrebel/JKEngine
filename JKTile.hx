@@ -14,10 +14,10 @@ class JKTile extends JKSprite
 	/*********************************************************************************************
 	 * MAIN 
 	 * *******************************************************************************************/
-	public function new( XCoord : Int = 0, YCoord : Int = 0, ?theWidth : Float
-		, ?theHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer, TileValue : Int = 0 ) 
+	public function new( XCoord : Int = 0, YCoord : Int = 0, ?TileWidth : Float
+		, ?TileHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer, TileValue : Int = 0 ) 
 	{
-		super(x, y, theWidth, theHeight, graphicFileLocation, theLayer);		
+		super(x, y, TileWidth, TileHeight, graphicFileLocation, theLayer);		
 		setCoordinates(XCoord, YCoord);
 	}
 	
@@ -29,8 +29,8 @@ class JKTile extends JKSprite
 		xCoord = X;
 		yCoord = Y;
 		
-		x = xCoord * width;
-		y = yCoord * height;		
+		x = xCoord * frameWidth;
+		y = yCoord * frameHeight;
 	}
 	
 	public function getXCoord() : Int

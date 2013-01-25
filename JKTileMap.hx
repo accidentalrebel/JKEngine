@@ -35,9 +35,7 @@ class JKTileMap extends JK2DArray
 		{
 			for ( j in 0...arrayHeight )
 			{	
-				set(new JKTile(i, j, theLayer, Std.parseInt(MapData.charAt(
-					( i * arrayHeight ) + j ))
-					), i, j);
+				set(new JKTile(i, j, 40, 40, "img/mapTiles.png", theLayer, Std.parseInt(MapData.charAt(( j * arrayHeight ) + i ))), i, j);
 			}
 		}
 	}
