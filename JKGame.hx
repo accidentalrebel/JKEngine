@@ -1,6 +1,7 @@
 package jkEngine;
 
 import jkEngine.input.JKMouse;
+import nme.display.DisplayObjectContainer;
 import nme.Lib;
 import nme.events.Event;
 import nme.events.EventDispatcher;
@@ -11,6 +12,7 @@ class JKGame
 	var eventDispatcher : EventDispatcher;
 	public var keyboard : JKKeyboard;
 	public var mouse : JKMouse;
+	public var stage : DisplayObjectContainer;
 	
 	public function new() 
 	{
@@ -19,7 +21,9 @@ class JKGame
 		new JKLayers();									// We automatically set up the Layers
 		
 		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
-		InitializeLoopTimer();							// We initialize the loop timer		
+		InitializeLoopTimer();							// We initialize the loop timer	
+		
+		stage = Lib.stage;
 	}
 	
 	/**

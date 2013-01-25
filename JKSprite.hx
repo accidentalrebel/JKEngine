@@ -11,8 +11,8 @@ class JKSprite extends JKObject
 	public var isShown : Bool = false;	
 	public var xAcceleration : Float = 0;
 	public var yAcceleration : Float = 0;
-	var frameWidth : Null<Float>;
-	var frameHeight : Null<Float>;
+	private var frameWidth : Null<Float>;
+	private var frameHeight : Null<Float>;
 	var layer : DisplayObjectContainer;
 	var Graphic : Bitmap;
 	
