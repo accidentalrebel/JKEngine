@@ -38,6 +38,7 @@ class JKSprite extends JKObject
 	var lastAnimationFrame : Float;
 	var currentAnimationSet : AnimSet;
 	var currentFrame : Int = 0;
+	var frameCount : Int = 0;
 	
 	/********************************************************************************
 	 * MAIN
@@ -167,21 +168,28 @@ class JKSprite extends JKObject
 			return;
 			
 		if ( Lib.getTimer() - lastAnimationFrame > currentAnimationSet.animSpeed )
-		{			
-			currentFrame++;
-			if ( currentFrame >= currentAnimationSet.animFrames.length )
-				currentFrame = 0;
-						
+		{				
 			currentAnimationSet.animFrames[currentFrame];
 			updateGraphicRect();
 			lastAnimationFrame = Lib.getTimer();
+			frameCount ++;
+			
+			currentFrame++;
+			if ( frameCount >= currentAnimationSet.animFrames.length)
+			{
+				currentFrame = currentAnimationSet.animFrames[0];
+				frameCount = 0;
+			}
 		}
 	}
 	
 	public function play(animationToPlay : String)
 	{
 		currentAnimationSet = animationList.get(animationToPlay);
+		currentFrame = currentAnimationSet.animFrames[0];
+		
 		canPlayAnimation = true;
+		frameCount = 0;
 		lastAnimationFrame = Lib.getTimer();		
 	}
 	
