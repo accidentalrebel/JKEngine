@@ -13,17 +13,24 @@ class JKSprite extends JKObject
 	public var yAcceleration : Float = 0;
 	private var frameWidth : Null<Float>;
 	private var frameHeight : Null<Float>;
+		
+	var animationList : Hash<Array<Int>>;
 	var layer : DisplayObjectContainer;
 	var Graphic : Bitmap;
+	var isAnimated : Bool;
 	
 	/********************************************************************************
 	 * MAIN
 	 * ******************************************************************************/
 	public function new( xPos : Float = 0, yPos : Float = 0, ?FrameWidth : Float
-		, ?FrameHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
+		, ?FrameHeight : Float, ?graphicFileLocation : String, IsAnimated : Bool = false, ?theLayer : DisplayObjectContainer ) 
 	{
-		super();
+		isAnimated = IsAnimated;		
+		if ( isAnimated )
+			animationList = new Hash<Array<Int>>();
 		
+		super();
+				
 		layer = theLayer;										// We save the layer
 				
 		frameWidth = FrameWidth;
@@ -108,6 +115,21 @@ class JKSprite extends JKObject
 		alpha = 0;
 		// layer.removeChild(this);
 	}	
+	
+	/********************************************************************************
+	 * ANIMATION
+	 * ******************************************************************************/
+	public function addAnimation( AnimName : String, Frames : Array<Int>, FrameRate : Float = 0, Looped : Bool = true ) : Void
+	{
+		if ( !isAnimated )
+		{
+			trace("Cannot add animation. Sprite is not animated");
+			return;
+		}
+		
+		animationList.set(AnimName, Frames);
+		trace(animationList.get(AnimName));
+	}
 	
 	/********************************************************************************
 	 * DESTROY
