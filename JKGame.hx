@@ -14,6 +14,9 @@ class JKGame
 	public var mouse : JKMouse;
 	public var stage : DisplayObjectContainer;
 	
+	/********************************************************************************
+	 * MAIN
+	 * ******************************************************************************/	
 	public function new() 
 	{
 		keyboard = new JKKeyboard();					// We set up the keyboard
@@ -25,14 +28,6 @@ class JKGame
 		stage = Lib.stage;
 	}
 	
-	/**
-	 * Listens to enterFrame which constitutes the game loop
-	 */
-	function InitializeLoopTimer()
-	{
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);		
-	}
-	
 	function update(e: Event):Void
 	{			
 		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.UPDATE_LOOP));			// We dispatch an updateLoop event
@@ -42,5 +37,16 @@ class JKGame
 	function lateUpdate() : Void
 	{
 		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.LATE_UPDATE_LOOP));		// We dispatch lateUpdate loop event
+	}
+	
+	/********************************************************************************
+	 * INITIALIZATION
+	 * ******************************************************************************/	
+	/**
+	 * Listens to enterFrame which constitutes the game loop
+	 */
+	function InitializeLoopTimer()
+	{
+		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);		
 	}
 }

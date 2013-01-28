@@ -25,6 +25,9 @@ class JKObject extends Sprite
 		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event
 	}
 	
+	/********************************************************************************
+	 * LISTENERS
+	 * ******************************************************************************/	
 	private function updateLoop(event:Event)
 	{		
 		update();
@@ -35,6 +38,9 @@ class JKObject extends Sprite
 		lateUpdate();
 	}	
 	
+	/********************************************************************************
+	 * LOOPS
+	 * ******************************************************************************/	
 	function update()
 	{
 		// Intentionally left blank that can be overriden by children
@@ -45,6 +51,9 @@ class JKObject extends Sprite
 		// Intentionally left blank that can be overriden by children
 	}
 	
+	/********************************************************************************
+	 * DESTROY
+	 * ******************************************************************************/	
 	public function destroy()
 	{		
 		Lib.current.stage.removeEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);	// We remove the listener for update loop event
@@ -59,33 +68,36 @@ class JKObject extends Sprite
 	 */
 	function ApplyMovement()
 	{
-		// We apply acceleration
+		// We apply acceleration for Y
 		if ( acceleration.y != 0 )
 		{
-			velocity.y += acceleration.y;
-			acceleration.y -= velocity.y;
+			velocity.y += acceleration.y;													// We apply the acceleration to the velocity
+			acceleration.y -= velocity.y;													// After application, we reduce the acceleration amount
 		}
 		
+		// We apply acceleration for X
 		if ( acceleration.x != 0 )
 		{
 			velocity.x += acceleration.x;
 			acceleration.x -= velocity.x;
 		}
 		
-		// We apply the velocity
+		// We apply the velocity for Y
 		if ( velocityDelta.y < maxVelocity.y )
 		{
 			if ( velocity.y != 0 )
-				velocityDelta.y += velocity.y;
+				velocityDelta.y += velocity.y;												
 		}
 		
+		// We apply the velocity for x
 		if ( velocityDelta.x < maxVelocity.x )
 		{
 			if ( velocity.x != 0 )
 				velocityDelta.x += velocity.x;
 		}
 		
-		y += velocityDelta.y;
-		x += velocityDelta.x;
+		// We adjust the positions
+		y += velocityDelta.y;																
+		x += velocityDelta.x;	
 	}
 }

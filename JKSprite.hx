@@ -103,7 +103,7 @@ class JKSprite extends JKObject
 	 */
 	function loadGraphic(fileLocation : String )
 	{				
-		spriteGraphic = new Bitmap(ApplicationMain.getAsset(fileLocation));	// We load the bitmap from the file location
+		spriteGraphic = new Bitmap(ApplicationMain.getAsset(fileLocation));					// We load the bitmap from the file location
 		
 		// Set the frameWidth and Height
 		if ( frameWidth == null )
@@ -112,28 +112,35 @@ class JKSprite extends JKObject
 			frameHeight = spriteGraphic.height;
 		
 		spriteGraphic.scrollRect = new Rectangle(0, 0, frameWidth, frameHeight);
-		addChild(spriteGraphic);										// We add the graphic to this object					
+		addChild(spriteGraphic);															// We add the graphic to this object					
 	}
 	
+	/**
+	 * Updates the graphic rectangle viewport according to the current frame of animation
+	 */
 	function updateGraphicRect()
 	{
 		spriteGraphic.scrollRect = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
 	}
 	
+	/**
+	 * Flips the bitmap graphic according top the specified direction
+	 * @param	direction	Left or Right
+	 */
 	function flipGraphic(direction : GraphicDirection)
 	{		
-		if ( currentGraphicDirection == direction )					// Dont do anything if we are already facing that direction
+		if ( currentGraphicDirection == direction )						// Dont do anything if we are already facing that direction
 			return;
 		
-		if ( direction == GraphicDirection.Left )
+		if ( direction == GraphicDirection.Left )	
 		{
-			spriteGraphic.scaleX = -1;	
-			spriteGraphic.x += frameWidth;			
+			spriteGraphic.scaleX = -1;									// We flip the scale
+			spriteGraphic.x += frameWidth;								// We adjust the x position
 		}
 		else
 		{
-			spriteGraphic.scaleX = 1;	
-			spriteGraphic.x -= frameWidth;	
+			spriteGraphic.scaleX = 1;									// We normalize the scale
+			spriteGraphic.x -= frameWidth;								// We adjust the x position
 		}
 		
 		currentGraphicDirection = direction;
@@ -149,7 +156,6 @@ class JKSprite extends JKObject
 	{
 		isShown = true;
 		alpha = 1;
-		//layer.addChild(this);
 	}
 	
 	/**
@@ -159,12 +165,18 @@ class JKSprite extends JKObject
 	{
 		isShown = false;
 		alpha = 0;
-		// layer.removeChild(this);
 	}	
 	
 	/********************************************************************************
 	 * ANIMATION
 	 * ******************************************************************************/
+	/**
+	 * Adds an animation for this sprite
+	 * @param	AnimName			The name of the animation
+	 * @param	Frames				The frames associated with this animation
+	 * @param	AnimationSpeed		The speed of the animation
+	 * @param	Looped				Whether the animation loops continuously or just plays once
+	 */
 	public function addAnimation( AnimName : String, Frames : Array<Int>, AnimationSpeed : Float = 0, Looped : Bool = true ) : Void
 	{
 		if ( !isAnimated )
@@ -173,45 +185,53 @@ class JKSprite extends JKObject
 			return;
 		}
 		
-		animationList.set(AnimName, new AnimSet(AnimName, Frames, AnimationSpeed));
+		animationList.set(AnimName, new AnimSet(AnimName, Frames, AnimationSpeed));			// We create a new animation set and add it to the hash
 	}
 	
+	/**
+	 * Applies the animation per update
+	 */
 	public function applyAnimation()
 	{
-		if ( !canPlayAnimation )
+		if ( !canPlayAnimation )															// If we cannot play animation, do not continue
 			return;
 			
-		if ( Lib.getTimer() - lastAnimationFrame > currentAnimationSet.animSpeed )
+		if ( Lib.getTimer() - lastAnimationFrame > currentAnimationSet.animSpeed )			// Handles the timing
 		{				
-			currentAnimationSet.animFrames[currentFrame];
-			updateGraphicRect();
-			lastAnimationFrame = Lib.getTimer();
-			frameCount ++;
+			updateGraphicRect();															// We update the rectangle viewport according to the newly set currentFrame
+			lastAnimationFrame = Lib.getTimer();											// We then set the lastAnimationFrame
+			frameCount ++;																	// We increase the frame count			
+			currentFrame++;																	// We point to the next frame
 			
-			currentFrame++;
-			if ( frameCount >= currentAnimationSet.animFrames.length)
+			if ( frameCount >= currentAnimationSet.animFrames.length)						// Makes sure that we loop from the start if we reach the end
 			{
-				currentFrame = currentAnimationSet.animFrames[0];
-				frameCount = 0;
+				currentFrame = currentAnimationSet.animFrames[0];							// We point to the first frame of this animation
+				frameCount = 0;																// We move the frame count 
 			}
 		}
 	}
 	
+	/**
+	 * Plays an animation
+	 * @param	animationToPlay		The name of the animation to play
+	 */
 	public function play(animationToPlay : String)
 	{
-		if ( currentlyPlaying == animationToPlay )						// Do not continue if we are already playing this
+		if ( currentlyPlaying == animationToPlay )											// Do not continue if we are already playing this
 			return;
 		
-		currentlyPlaying = animationToPlay;
-		currentAnimationSet = animationList.get(animationToPlay);
+		currentlyPlaying = animationToPlay;													// We set what animation is currentlyPlaying
+		currentAnimationSet = animationList.get(animationToPlay);							// We get the current animationSet		
+		currentFrame = currentAnimationSet.animFrames[0];									// We get the current frame ( in this case the first frame)
 		
-		currentFrame = currentAnimationSet.animFrames[0];
-		
-		canPlayAnimation = true;
-		frameCount = 0;
-		lastAnimationFrame = Lib.getTimer();
+		canPlayAnimation = true;															// We can now play the aniamtion
+		frameCount = 0;																		// We start the frameCount
+		lastAnimationFrame = Lib.getTimer();												// We save this frame as the lastAniamtionFrame
 	}
 	
+	/**
+	 * Stops the current animation
+	 */
 	public function stop()
 	{
 		canPlayAnimation = false;

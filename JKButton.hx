@@ -9,6 +9,9 @@ class JKButton extends JKSprite
 {
 	var isClicked : Bool = false;
 
+	/********************************************************************************
+	 * MAIN
+	 * ******************************************************************************/	
 	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
 		, ?theHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer ) 
 	{
@@ -23,6 +26,15 @@ class JKButton extends JKSprite
 		return super.update();
 	}
 	
+	override private function lateUpdate():Dynamic 
+	{
+		isClicked = false;
+		super.lateUpdate();
+	}	
+	
+	/********************************************************************************
+	 * SENSORS
+	 * ******************************************************************************/	
 	/**
 	 * Checks if this particular button is clicked
 	 */
@@ -33,11 +45,5 @@ class JKButton extends JKSprite
 		{
 			isClicked = true;
 		}		
-	}
-	
-	override private function lateUpdate():Dynamic 
-	{
-		isClicked = false;
-		super.lateUpdate();
 	}	
 }

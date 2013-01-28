@@ -25,6 +25,13 @@ class JK2DArray extends JKSprite
 		populate(toPopulateWith);		
     }
 	
+	/********************************************************************************
+	 * POPULATION
+	 * ******************************************************************************/	
+	/**
+	 * Populates the array
+	 * @param	?toPopulateWith
+	 */
 	public function populate(?toPopulateWith : Dynamic)
 	{
 		for ( i in 0...arrayWidth )
@@ -36,6 +43,9 @@ class JK2DArray extends JKSprite
 		}
 	}
 
+	/********************************************************************************
+	 * ACCESSORS
+	 * ******************************************************************************/	
 	/**
 	 * Get's the content of the array at the x and y positions
 	 * @param	xPos	the x position
@@ -57,6 +67,9 @@ class JK2DArray extends JKSprite
 		array[yPos * pitch + xPos] = toPut;
     }
 	
+	/********************************************************************************
+	 * DEBUGGING
+	 * ******************************************************************************/	
 	/**
 	 * Displays the content of the whole array using trace()
 	 */
