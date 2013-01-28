@@ -19,6 +19,7 @@ class JKTile extends JKSprite
 	{
 		super(x, y, TileWidth, TileHeight, graphicFileLocation, theLayer);		
 		setCoordinates(XCoord, YCoord);
+		objectName = "(" + Std.string(XCoord) + "," + Std.string(YCoord) + ")";
 	}
 	
 	/*********************************************************************************************

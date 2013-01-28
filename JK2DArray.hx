@@ -1,4 +1,5 @@
 package jkEngine;
+import nme.Lib;
 
 /**
  * ...
@@ -8,7 +9,7 @@ package jkEngine;
 class JK2DArray extends JKSprite
 {
 	var pitch: Int; 
-	var array : Array<Dynamic>;
+	public var array : Array<Dynamic>;
 	public var arrayWidth : Int;
 	public var arrayHeight : Int;
 	
@@ -81,6 +82,6 @@ class JK2DArray extends JKSprite
 			i++;
 		}
 		
-		trace(toDisplay);						// We display the generated string
+		Lib.trace(toDisplay);						// We display the generated string
 	}	
 }
