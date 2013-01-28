@@ -66,6 +66,12 @@ class JKObject extends Sprite
 			acceleration.y -= velocity.y;
 		}
 		
+		if ( acceleration.x != 0 )
+		{
+			velocity.x += acceleration.x;
+			acceleration.x -= velocity.x;
+		}
+		
 		// We apply the velocity
 		if ( velocityDelta.y < maxVelocity.y )
 		{
