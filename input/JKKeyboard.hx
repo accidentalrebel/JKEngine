@@ -11,16 +11,29 @@ class JKKeyboard extends JKObject
 {
 	var pressedKey : Null<Int>;
 	var isMousePressed : Bool;
-	var isKeyPressed : Bool = false;	
+	var isKeyPressed : Bool = false;
+	var keyCode : Hash<Int>;
 
 	public function new() 
 	{
+		keyCode = new Hash<Int>();
+		setupKeyCodeHash();
+		
 		super();
 		pressedKey = null;
 		
 		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);			// We listen to a KEY_DOWN event
 		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event
 		
+	}
+	
+	function setupKeyCodeHash()
+	{
+		keyCode.set("w", 87);
+		keyCode.set("a", 65);
+		keyCode.set("s", 83);
+		keyCode.set("d", 68);
+		keyCode.set("space", 82);
 	}
 	
 	/**
@@ -78,9 +91,9 @@ class JKKeyboard extends JKObject
 	 * @param	toCheck		The key to check
 	 * @return	True if the key is pressed. Otherwise, false
 	 */
-	public function checkIfKeyPressed(toCheck : Int) : Bool
+	public function checkIfKeyPressed(toCheck : String) : Bool
 	{
-		if ( pressedKey == toCheck )
+		if ( pressedKey == keyCode.get(toCheck) )
 			return true;
 		else
 			return false;
