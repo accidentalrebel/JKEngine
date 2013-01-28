@@ -21,6 +21,12 @@ class AnimSet
 	}
 }
 
+enum GraphicDirection
+{
+	Left;
+	Right;
+}
+
 class JKSprite extends JKObject
 {		
 	public var isShown : Bool = false;	
@@ -33,13 +39,14 @@ class JKSprite extends JKObject
 	var canPlayAnimation : Bool = false;
 	var layer : DisplayObjectContainer;
 	var spriteGraphic : Bitmap;
+	var currentGraphicDirection : GraphicDirection;
 	
 	var isAnimated : Bool;
 	var currentlyPlaying : String;
 	var lastAnimationFrame : Float;
 	var currentAnimationSet : AnimSet;
 	var currentFrame : Int = 0;
-	var frameCount : Int = 0;
+	var frameCount : Int = 0;	
 	
 	/********************************************************************************
 	 * MAIN
@@ -47,6 +54,8 @@ class JKSprite extends JKObject
 	public function new( xPos : Float = 0, yPos : Float = 0, ?FrameWidth : Float
 		, ?FrameHeight : Float, ?graphicFileLocation : String, IsAnimated : Bool = false, ?theLayer : DisplayObjectContainer ) 
 	{
+		currentGraphicDirection = GraphicDirection.Right;
+		
 		super();
 				
 		layer = theLayer;										// We save the layer
@@ -109,6 +118,25 @@ class JKSprite extends JKObject
 	function updateGraphicRect()
 	{
 		spriteGraphic.scrollRect = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
+	}
+	
+	function flipGraphic(direction : GraphicDirection)
+	{		
+		if ( currentGraphicDirection == direction )					// Dont do anything if we are already facing that direction
+			return;
+		
+		if ( direction == GraphicDirection.Left )
+		{
+			spriteGraphic.scaleX = -1;	
+			spriteGraphic.x += frameWidth;			
+		}
+		else
+		{
+			spriteGraphic.scaleX = 1;	
+			spriteGraphic.x -= frameWidth;	
+		}
+		
+		currentGraphicDirection = direction;
 	}
 	
 	/********************************************************************************
@@ -196,7 +224,7 @@ class JKSprite extends JKObject
 		
 		canPlayAnimation = true;
 		frameCount = 0;
-		lastAnimationFrame = Lib.getTimer();		
+		lastAnimationFrame = Lib.getTimer();
 	}
 	
 	public function stop()
