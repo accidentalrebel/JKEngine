@@ -35,6 +35,7 @@ class JKSprite extends JKObject
 	var spriteGraphic : Bitmap;
 	
 	var isAnimated : Bool;
+	var currentlyPlaying : String;
 	var lastAnimationFrame : Float;
 	var currentAnimationSet : AnimSet;
 	var currentFrame : Int = 0;
@@ -185,7 +186,12 @@ class JKSprite extends JKObject
 	
 	public function play(animationToPlay : String)
 	{
+		if ( currentlyPlaying == animationToPlay )						// Do not continue if we are already playing this
+			return;
+		
+		currentlyPlaying = animationToPlay;
 		currentAnimationSet = animationList.get(animationToPlay);
+		
 		currentFrame = currentAnimationSet.animFrames[0];
 		
 		canPlayAnimation = true;

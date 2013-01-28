@@ -33,7 +33,7 @@ class JKKeyboard extends JKObject
 		keyCode.set("a", 65);
 		keyCode.set("s", 83);
 		keyCode.set("d", 68);
-		keyCode.set("space", 82);
+		keyCode.set("spacebar", 32);
 	}
 	
 	/**
@@ -93,7 +93,15 @@ class JKKeyboard extends JKObject
 	 */
 	public function checkIfKeyPressed(toCheck : String) : Bool
 	{
-		if ( pressedKey == keyCode.get(toCheck) )
+		if ( pressedKey == keyCode.get(toCheck.toLowerCase()) )
+			return true;
+		else
+			return false;
+	}
+	
+	public function checkIfKeyReleased(toCheck : String) : Bool
+	{
+		if ( pressedKey != keyCode.get(toCheck.toLowerCase()) )
 			return true;
 		else
 			return false;
