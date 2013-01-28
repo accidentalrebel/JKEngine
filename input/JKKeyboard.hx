@@ -9,12 +9,13 @@ import nme.Lib;
 
 class JKKeyboard extends JKObject
 {
-	var pressedKey : Null<Int>;
-	var isMousePressed : Bool;
-	var isKeyPressed : Bool = false;
+	var lastKeyPressed : Null<Int>;
 	var keyCode : Hash<Int>;
 	var pressedKeyList : Array<Int>;
 
+	/********************************************************************************
+	 * MAIN
+	 * ******************************************************************************/	
 	public function new() 
 	{
 		pressedKeyList = new Array<Int>();
@@ -22,12 +23,23 @@ class JKKeyboard extends JKObject
 		setupKeyCodeHash();
 		
 		super();
-		pressedKey = null;
+		lastKeyPressed = null;
 		
 		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);			// We listen to a KEY_DOWN event
 		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event		
 	}
 	
+	override private function lateUpdate():Dynamic 
+	{
+		super.lateUpdate();		
+	}
+	
+	/********************************************************************************
+	 * INITIALIZATION
+	 * ******************************************************************************/	
+	/**
+	 * We assign a keyCode integer to a string for easy access
+	 */
 	function setupKeyCodeHash()
 	{
 		keyCode.set("w", 87);
@@ -37,21 +49,31 @@ class JKKeyboard extends JKObject
 		keyCode.set("spacebar", 32);
 	}
 	
+	/********************************************************************************
+	 * KEYPRESS LISTENERS
+	 * ******************************************************************************/	
 	/**
 	 * Handles what happens when a keyboard key is pressed
 	 * @param	e
 	 */
 	function onKeyPress (e : KeyboardEvent) : Void
 	{	
-		addToPressedKeyList(e.keyCode);		
-		
-		if ( !isKeyPressed )										// Only do this if no key is currently being pressed
-		{
-			pressedKey = e.keyCode;									// We save the pressed Key
-			isKeyPressed = true;									// Set flag
-		}
+		lastKeyPressed = e.keyCode;
+		addToPressedKeyList(e.keyCode);								// We take note of the key that was pressed
 	}
 	
+	/**
+	 * Handles what happens when a keyboard key is released
+	 * @param	e
+	 */
+	function onKeyRelease( e : KeyboardEvent ) : Void
+	{
+		removeFromPressedKeyList(e.keyCode);
+	}
+	
+	/********************************************************************************
+	 * PRESSED KEY LIST
+	 * ******************************************************************************/	
 	function addToPressedKeyList( toAdd : Int )
 	{
 		for ( pressed in pressedKeyList )
@@ -67,41 +89,23 @@ class JKKeyboard extends JKObject
 	{
 		pressedKeyList.remove(toRemove);
 	}
-	
-	/**
-	 * Handles what happens when a keyboard key is released
-	 * @param	e
-	 */
-	function onKeyRelease( e : KeyboardEvent ) : Void
-	{
-		removeFromPressedKeyList(e.keyCode);
-		
-		if ( isKeyPressed )											// Only do this if key is currently being pressed
-		{
-			if ( e.keyCode == pressedKey )							// Make sure that the released key is the currentKey pressed	
-			{				
-				pressedKey = null;									// We set the pressedKey to null
-			}
-			isKeyPressed = false;									// Set flag
-		}	
-	}
 			
 	/**
 	 * Returns the currently pressed key
 	 * @return	Currently pressed key
 	 */
-	public function getPressedKey() : Null<Int>
+	public function getLastKeyPressed() : Null<Int>
 	{		
-		return pressedKey;		
+		return lastKeyPressed;		
 	}
 	
 	/**
-	 * Checks if there is a key that is currently pressed for this frame
+	 * Checks if there is are keys that are currently pressed
 	 * @return	True if a key is pressed. Otherwise, false
 	 */
 	public function isAnyKeyPressed() : Bool
 	{
-		if ( pressedKey != null )
+		if ( pressedKeyList.length != 0 )
 			return true;
 			
 		return false;
@@ -124,11 +128,4 @@ class JKKeyboard extends JKObject
 		
 		return false;
 	}	
-	
-	override private function lateUpdate():Dynamic 
-	{
-		super.lateUpdate();		
-		//pressedKey = null;				// We reset the value for the next frame
-		isMousePressed = false;
-	}
 }
