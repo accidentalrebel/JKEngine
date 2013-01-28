@@ -13,9 +13,11 @@ class JKKeyboard extends JKObject
 	var isMousePressed : Bool;
 	var isKeyPressed : Bool = false;
 	var keyCode : Hash<Int>;
+	var pressedKeyList : Array<Int>;
 
 	public function new() 
 	{
+		pressedKeyList = new Array<Int>();
 		keyCode = new Hash<Int>();
 		setupKeyCodeHash();
 		
@@ -23,8 +25,7 @@ class JKKeyboard extends JKObject
 		pressedKey = null;
 		
 		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);			// We listen to a KEY_DOWN event
-		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event
-		
+		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);			// WE listen to a KEY_UP event		
 	}
 	
 	function setupKeyCodeHash()
@@ -42,11 +43,31 @@ class JKKeyboard extends JKObject
 	 */
 	function onKeyPress (e : KeyboardEvent) : Void
 	{	
+		addToPressedKeyList(e.keyCode);		
+		
 		if ( !isKeyPressed )										// Only do this if no key is currently being pressed
 		{
 			pressedKey = e.keyCode;									// We save the pressed Key
 			isKeyPressed = true;									// Set flag
 		}
+	}
+	
+	function addToPressedKeyList( toAdd : Int )
+	{
+		for ( pressed in pressedKeyList )
+		{
+			if ( pressed == toAdd )
+				return;
+		}
+		
+		pressedKeyList.push(toAdd);
+		trace("added " + toAdd);
+	}
+	
+	function removeFromPressedKeyList( toRemove : Int )
+	{
+		pressedKeyList.remove(toRemove);
+		trace("removed " + toRemove);
 	}
 	
 	/**
@@ -55,6 +76,8 @@ class JKKeyboard extends JKObject
 	 */
 	function onKeyRelease( e : KeyboardEvent ) : Void
 	{
+		removeFromPressedKeyList(e.keyCode);
+		
 		if ( isKeyPressed )											// Only do this if key is currently being pressed
 		{
 			if ( e.keyCode == pressedKey )							// Make sure that the released key is the currentKey pressed	
