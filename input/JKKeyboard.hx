@@ -123,15 +123,7 @@ class JKKeyboard extends JKObject
 		}
 		
 		return false;
-	}
-	
-	public function checkIfKeyReleased(toCheck : String) : Bool
-	{
-		if ( pressedKey != keyCode.get(toCheck.toLowerCase()) )
-			return true;
-		else
-			return false;
-	}
+	}	
 	
 	override private function lateUpdate():Dynamic 
 	{
