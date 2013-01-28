@@ -10,6 +10,7 @@ class JKObject extends Sprite
 	public var objectName : String;
 	var velocity : JKPoint;
 	var velocityDelta : JKPoint;
+	var acceleration : JKPoint;
 	var maxVelocity : JKPoint;
 	
 	public function new() 
@@ -17,6 +18,8 @@ class JKObject extends Sprite
 		velocity = new JKPoint(0, 0);
 		velocityDelta = new JKPoint(0, 0);
 		maxVelocity = new JKPoint(1, 1);
+		acceleration = new JKPoint(0, 0);
+		
 		super();	
 		Lib.current.stage.addEventListener(JKEvent.UPDATE_LOOP, updateLoop);				// We listen for an update loop event
 		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event
@@ -56,6 +59,14 @@ class JKObject extends Sprite
 	 */
 	function ApplyMovement()
 	{
+		// We apply acceleration
+		if ( acceleration.y != 0 )
+		{
+			velocity.y += acceleration.y;
+			acceleration.y -= velocity.y;
+		}
+		
+		// We apply the velocity
 		if ( velocityDelta.y < maxVelocity.y )
 		{
 			if ( velocity.y != 0 )
