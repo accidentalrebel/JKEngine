@@ -15,11 +15,18 @@ import nme.Lib;
 class JKText extends TextField
 {
 	var textFormat : TextFormat;
+	var layer : DisplayObjectContainer;
 		
+	/**********
+	 * TODO: Do not make JKText extend from TextField but from JKSprite and just add a TextField object under this class
+	 * */
+	
 	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
 		, ?theHeight : Float, ?theText : String, theTextColor : Int = 0x000000
-		, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?layer : DisplayObjectContainer ) 
+		, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?theLayer : DisplayObjectContainer ) 
 	{
+		layer = theLayer;
+		
 		super();
 						
 		// Set the positions
@@ -65,5 +72,14 @@ class JKText extends TextField
 	{		
 		text = theText;										// We set the actual text
 		setTextFormat(textFormat);							// We reapply the text format
+	}
+	
+	/********************************************************************************
+	 * DESTROY
+	 * ******************************************************************************/
+	override public function destroy():Dynamic 
+	{	
+		layer.removeChild(this);							// We remove the object from its layer
+		super.destroy();									// We then start destroying
 	}
 }

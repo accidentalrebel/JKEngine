@@ -26,7 +26,7 @@ class JKTile extends JKSprite
 	}
 	
 	/*********************************************************************************************
-	 * COORDINATES
+	 * HELPER FUNCTIONS
 	 * *******************************************************************************************/
 	public function setCoordinates( X : Int, Y : Int)
 	{
@@ -35,7 +35,7 @@ class JKTile extends JKSprite
 		
 		x = xCoord * frameWidth;
 		y = yCoord * frameHeight;
-	}
+	}	
 	
 	public function getXCoord() : Int
 	{

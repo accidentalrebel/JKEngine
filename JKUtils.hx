@@ -8,6 +8,8 @@ class JKUtils
 		
 	}	
 	
+	// TODO: Make use of the collision checking from the platformer project
+	
 	/**
 	 * Checks if there is a collision
 	 */
