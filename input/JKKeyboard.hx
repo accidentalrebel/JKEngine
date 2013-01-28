@@ -61,13 +61,11 @@ class JKKeyboard extends JKObject
 		}
 		
 		pressedKeyList.push(toAdd);
-		trace("added " + toAdd);
 	}
 	
 	function removeFromPressedKeyList( toRemove : Int )
 	{
 		pressedKeyList.remove(toRemove);
-		trace("removed " + toRemove);
 	}
 	
 	/**
@@ -116,10 +114,13 @@ class JKKeyboard extends JKObject
 	 */
 	public function checkIfKeyPressed(toCheck : String) : Bool
 	{
-		if ( pressedKey == keyCode.get(toCheck.toLowerCase()) )
-			return true;
-		else
-			return false;
+		for ( pressed in pressedKeyList )
+		{
+			if ( pressed == keyCode.get(toCheck.toLowerCase()) )
+				return true;
+		}
+		
+		return false;
 	}
 	
 	public function checkIfKeyReleased(toCheck : String) : Bool
