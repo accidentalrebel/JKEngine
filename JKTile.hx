@@ -9,7 +9,7 @@ class JKTile extends JKSprite
 {
 	private var xCoord : Int = 0;
 	private var yCoord : Int = 0;
-	var tileValue : Int = 0;
+	public var tileValue : Int = 0;
 	
 	/*********************************************************************************************
 	 * MAIN 
@@ -17,9 +17,12 @@ class JKTile extends JKSprite
 	public function new( XCoord : Int = 0, YCoord : Int = 0, ?TileWidth : Float
 		, ?TileHeight : Float, ?graphicFileLocation : String, ?theLayer : DisplayObjectContainer, TileValue : Int = 0 ) 
 	{
+		tileValue = TileValue;
+		
 		super(x, y, TileWidth, TileHeight, graphicFileLocation, theLayer);		
 		setCoordinates(XCoord, YCoord);
 		objectName = "(" + Std.string(XCoord) + "," + Std.string(YCoord) + ")";
+		
 	}
 	
 	/*********************************************************************************************
