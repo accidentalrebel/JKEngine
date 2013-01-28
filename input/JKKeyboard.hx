@@ -117,7 +117,9 @@ class JKKeyboard extends JKObject
 		for ( pressed in pressedKeyList )
 		{
 			if ( pressed == keyCode.get(toCheck.toLowerCase()) )
+			{
 				return true;
+			}
 		}
 		
 		return false;
