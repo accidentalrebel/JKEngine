@@ -12,11 +12,9 @@ class JKObject extends Sprite
 	var velocityDelta : JKPoint;
 	var acceleration : JKPoint;
 	var maxVelocity : JKPoint;
-	var center : JKPoint;
 	
 	public function new() 
 	{
-		center = new JKPoint(0, 0);
 		velocity = new JKPoint(0, 0);
 		velocityDelta = new JKPoint(0, 0);
 		maxVelocity = new JKPoint(1, 1);
@@ -24,8 +22,7 @@ class JKObject extends Sprite
 		
 		super();	
 		Lib.current.stage.addEventListener(JKEvent.UPDATE_LOOP, updateLoop);				// We listen for an update loop event
-		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event
-		Lib.stage.addEventListener(Event.RESIZE, onScreenResize);
+		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event		
 	}
 	
 	/********************************************************************************
@@ -102,14 +99,5 @@ class JKObject extends Sprite
 		// We adjust the positions
 		y += velocityDelta.y;																
 		x += velocityDelta.x;	
-	}
-	
-	/********************************************************************************
-	 * SCREEN
-	 * ******************************************************************************/	
-	function onScreenResize(e : Event) : Void
-	{
-		center.x = (Lib.stage.stageWidth / 2);
-		center.y = (Lib.stage.stageHeight / 2);
 	}
 }
