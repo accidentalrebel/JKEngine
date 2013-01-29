@@ -120,6 +120,9 @@ class JKSprite extends JKObject
 	 */
 	function updateGraphicRect()
 	{
+		if ( spriteGraphic == null )
+			return;
+			
 		spriteGraphic.scrollRect = new Rectangle(currentFrame * frameWidth, 0, frameWidth, frameHeight);
 	}
 	

@@ -18,13 +18,16 @@ class JKTileMap extends JK2DArray
 		//populateTileMap(TheLayer);
 	}
 	
-	function populateTileMap() : Void
+	function populateTileMap<T>(myClass : Class<T>, parameters : Array<Dynamic>) : Void
 	{
 		for ( i in 0...arrayWidth )
 		{
 			for ( j in 0...arrayHeight )
-			{	
-				set(new JKTile(i, j, theLayer), i, j);
+			{				
+				parameters[0] = i;
+				parameters[1] = j;
+				var instance = Type.createInstance(myClass, parameters);				
+				set(instance, i, j);
 			}
 		}
 	}

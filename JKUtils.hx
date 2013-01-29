@@ -25,4 +25,3 @@ class JKUtils
 		return false;
 	}
 }
-
