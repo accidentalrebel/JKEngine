@@ -7,46 +7,36 @@ import nme.events.Event;
 import nme.events.EventDispatcher;
 import jkEngine.input.JKKeyboard;
 
-class JKGame
+class JKGame extends JKObject
 {
 	var eventDispatcher : EventDispatcher;
 	public var keyboard : JKKeyboard;
 	public var mouse : JKMouse;
-	public var stage : DisplayObjectContainer;
+	var center : JKPoint;
 	
 	/********************************************************************************
 	 * MAIN
 	 * ******************************************************************************/	
 	public function new() 
 	{
+		super();
+		
+		center = new JKPoint(0, 0);
+		Lib.stage.addEventListener(Event.RESIZE, onScreenResize);		
+		
 		keyboard = new JKKeyboard();					// We set up the keyboard
 		mouse = new JKMouse();							// We set up the mouse		
 		
-		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher
-		InitializeLoopTimer();							// We initialize the loop timer	
+		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher		
+	}
 		
-		stage = Lib.stage;
-	}
-	
-	function update(e: Event):Void
-	{			
-		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.UPDATE_LOOP));			// We dispatch an updateLoop event
-		lateUpdate();																// Once the update has finished, we call the lateUpdate
-	}
-	
-	function lateUpdate() : Void
-	{
-		Lib.current.stage.dispatchEvent(new JKEvent(JKEvent.LATE_UPDATE_LOOP));		// We dispatch lateUpdate loop event
-	}
-	
 	/********************************************************************************
-	 * INITIALIZATION
+	 * SCREEN
 	 * ******************************************************************************/	
-	/**
-	 * Listens to enterFrame which constitutes the game loop
-	 */
-	function InitializeLoopTimer()
+	function onScreenResize(e : Event) : Void
 	{
-		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);		
+		center.x = (Lib.stage.stageWidth / 2);
+		center.y = (Lib.stage.stageHeight / 2);
+		trace(center.x + "," + center.y);
 	}
 }

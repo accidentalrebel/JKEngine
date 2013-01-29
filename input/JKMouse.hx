@@ -1,6 +1,6 @@
 package jkEngine.input;
 import jkEngine.JKObject;
-import jkengine.JKPoint;
+import jkEngine.JKPoint;
 import nme.events.MouseEvent;
 import nme.Lib;
 

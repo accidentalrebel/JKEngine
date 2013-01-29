@@ -1,6 +1,6 @@
 package jkEngine;
 
- import jkengine.JKPoint;
+ import jkEngine.JKPoint;
  import nme.display.Sprite;
  import nme.Lib;
  import nme.events.Event;
@@ -100,4 +100,6 @@ class JKObject extends Sprite
 		y += velocityDelta.y;																
 		x += velocityDelta.x;	
 	}
+	
+	
 }
