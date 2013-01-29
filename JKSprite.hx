@@ -46,7 +46,9 @@ class JKSprite extends JKObject
 	var lastAnimationFrame : Float;
 	var currentAnimationSet : AnimSet;
 	var currentFrame : Int = 0;
-	var frameCount : Int = 0;	
+	var frameCount : Int = 0;
+	
+	public var isCentered : Bool = false;
 	
 	/********************************************************************************
 	 * MAIN
@@ -94,6 +96,20 @@ class JKSprite extends JKObject
 			applyAnimation();
 	}	
 	
+	/********************************************************************************
+	 * SCREEN RESIZE
+	 * ******************************************************************************/
+	override private function onScreenResize(e:Event):Void 
+	{
+		super.onScreenResize(e);
+		
+		if ( isCentered )
+		{			
+			x = (stage.stageWidth / 2) - (width / 2);
+			y = (stage.stageHeight / 2) - (height / 2);
+		}
+	}
+	 
 	/********************************************************************************
 	 * GRAPHIC
 	 * ******************************************************************************/
