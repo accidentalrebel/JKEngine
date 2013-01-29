@@ -10,7 +10,6 @@ import nme.Lib;
 class JKKeyboard extends JKObject
 {
 	var lastKeyPressed : Null<Int>;
-	var keyCode : Hash<Int>;
 	var pressedKeyList : Array<Int>;
 
 	/********************************************************************************
@@ -19,8 +18,6 @@ class JKKeyboard extends JKObject
 	public function new() 
 	{
 		pressedKeyList = new Array<Int>();
-		keyCode = new Hash<Int>();
-		setupKeyCodeHash();
 		
 		super();
 		lastKeyPressed = null;
@@ -32,21 +29,6 @@ class JKKeyboard extends JKObject
 	override private function lateUpdate():Dynamic 
 	{
 		super.lateUpdate();		
-	}
-	
-	/********************************************************************************
-	 * INITIALIZATION
-	 * ******************************************************************************/	
-	/**
-	 * We assign a keyCode integer to a string for easy access
-	 */
-	function setupKeyCodeHash()
-	{
-		keyCode.set("w", 87);
-		keyCode.set("a", 65);
-		keyCode.set("s", 83);
-		keyCode.set("d", 68);
-		keyCode.set("spacebar", 32);
 	}
 	
 	/********************************************************************************
@@ -116,11 +98,11 @@ class JKKeyboard extends JKObject
 	 * @param	toCheck		The key to check
 	 * @return	True if the key is pressed. Otherwise, false
 	 */
-	public function checkIfKeyPressed(toCheck : String) : Bool
+	public function checkIfKeyPressed(toCheck : Int) : Bool
 	{
 		for ( pressed in pressedKeyList )
 		{
-			if ( pressed == keyCode.get(toCheck.toLowerCase()) )
+			if ( pressed == toCheck )
 			{
 				return true;
 			}
