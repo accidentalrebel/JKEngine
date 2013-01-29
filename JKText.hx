@@ -12,39 +12,30 @@ import nme.Lib;
  * @author Karlo
  */
 
-class JKText extends TextField
+class JKText extends JKSprite
 {
 	var textFormat : TextFormat;
-	var layer : DisplayObjectContainer;
-		
-	/**********
-	 * TODO: Do not make JKText extend from TextField but from JKSprite and just add a TextField object under this class
-	 * */
+	var textField : TextField;
 	
-	public function new( xPos : Float = 0, yPos : Float = 0, ?theWidth : Float
-		, ?theHeight : Float, ?theText : String, theTextColor : Int = 0x000000
-		, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?theLayer : DisplayObjectContainer ) 
+	public function new( xPos : Float = 0, yPos : Float = 0, ?textWidth : Float, ?textHeight : Float, ?theText : String, theTextColor : Int = 0x000000, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?theLayer : DisplayObjectContainer ) 
 	{
 		layer = theLayer;
+		textField = new TextField();
 		
-		super();
-						
-		// Set the positions
-		x = xPos;
-		y = yPos;
+		super(xPos, yPos, theLayer);
 		
 		// Set the dimensions
-		if ( theWidth != null )
-			width = theWidth;
+		if ( textWidth != null )
+			textField.width = textWidth;
 			
-		if ( theHeight != null )
-			height = theHeight;
+		if ( textHeight != null )
+			textField.height = textHeight;
 			
 		// Set the text format		
-		multiline = true;									// Enable multiline
-		wordWrap = true;									// Enable wordwrap
+		textField.multiline = true;							// Enable multiline
+		textField.wordWrap = true;							// Enable wordwrap
 		textFormat = new TextFormat();		
-		textColor = theTextColor;							// We set the textColor
+		textField.textColor = theTextColor;					// We set the textColor
 		
 		if ( alignment != null )		
 			textFormat.align = alignment;					// We set the alignment
@@ -60,8 +51,9 @@ class JKText extends TextField
 		if ( layer == null )
 			layer = Lib.stage;			
 				
-		layer.addChild(this);								// Add to layer
-		setTextFormat(textFormat);							// Apply text format
+		layer.addChild(this);								// We add this object to the layer		
+		addChild(textField);								// We add the textField to this object
+		textField.setTextFormat(textFormat);				// Apply text format
 	}
 	
 	/**
@@ -70,8 +62,8 @@ class JKText extends TextField
 	 */
 	public function setText(theText : String )
 	{		
-		text = theText;										// We set the actual text
-		setTextFormat(textFormat);							// We reapply the text format
+		textField.text = theText;							// We set the actual text
+		textField.setTextFormat(textFormat);				// We reapply the text format
 	}
 	
 	/********************************************************************************
@@ -79,7 +71,8 @@ class JKText extends TextField
 	 * ******************************************************************************/
 	override public function destroy():Dynamic 
 	{	
-		layer.removeChild(this);							// We remove the object from its layer
+		removeChild(this);									// We remove the textField from this object
+		layer.removeChild(this);							// We remove the object from its layer		
 		super.destroy();									// We then start destroying
 	}
 }
