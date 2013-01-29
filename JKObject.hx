@@ -23,6 +23,7 @@ class JKObject extends Sprite
 		super();	
 		Lib.current.stage.addEventListener(JKEvent.UPDATE_LOOP, updateLoop);				// We listen for an update loop event
 		Lib.current.stage.addEventListener(JKEvent.LATE_UPDATE_LOOP, lateUpdateLoop);		// We listen for a late update loop event		
+		Lib.stage.addEventListener(Event.RESIZE, onScreenResize);	
 	}
 	
 	/********************************************************************************
@@ -99,5 +100,13 @@ class JKObject extends Sprite
 		// We adjust the positions
 		y += velocityDelta.y;																
 		x += velocityDelta.x;	
+	}
+	
+	/********************************************************************************
+	 * SCREEN
+	 * ******************************************************************************/	
+	function onScreenResize(e : Event) : Void
+	{
+		
 	}
 }

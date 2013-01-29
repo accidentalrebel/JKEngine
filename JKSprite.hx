@@ -35,6 +35,8 @@ class JKSprite extends JKObject
 	private var frameWidth : Null<Float>;
 	private var frameHeight : Null<Float>;
 		
+	var savedScreenSize : JKPoint;
+	
 	var animationList : Hash<AnimSet>;
 	var canPlayAnimation : Bool = false;
 	var layer : DisplayObjectContainer;
@@ -66,6 +68,8 @@ class JKSprite extends JKObject
 		// Set the positions
 		x = xPos;
 		y = yPos;
+		
+		savedScreenSize = new JKPoint( Lib.stage.stageWidth, Lib.stage.stageHeight );
 			
 		// Set the graphic
 		if ( graphicFileLocation != null)
@@ -238,6 +242,20 @@ class JKSprite extends JKObject
 	public function stop()
 	{
 		canPlayAnimation = false;
+	}
+	
+	/********************************************************************************
+	 * SCREEN
+	 * ******************************************************************************/	
+	override private function onScreenResize(e:Event):Void 
+	{
+		super.onScreenResize(e);
+		
+		var newScreenSize : JKPoint = new JKPoint( Lib.stage.stageWidth, Lib.stage.stageHeight);
+		var ratio : JKPoint = new JKPoint();
+		ratio.x = newScreenSize.x / savedScreenSize.x;
+		ratio.y = newScreenSize.y / savedScreenSize.y;
+		trace(ratio.x + "," + ratio.y);
 	}
 	
 	/********************************************************************************

@@ -26,17 +26,15 @@ class JKGame extends JKObject
 		keyboard = new JKKeyboard();					// We set up the keyboard
 		mouse = new JKMouse();							// We set up the mouse		
 		
-		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher		
-		Lib.stage.addEventListener(Event.RESIZE, onScreenResize);		
+		eventDispatcher = new EventDispatcher();		// We setup the eventDispatcher					
 	}
 	
 	/********************************************************************************
 	 * SCREEN
 	 * ******************************************************************************/	
-	function onScreenResize(e : Event) : Void
-	{
-		screenCenter = getScreenCenter();
-		trace(screenCenter.x + "," + screenCenter.y);
+	override private function onScreenResize(e:Event):Void 
+	{		
+		screenCenter = getScreenCenter();		
 	}
 	
 	function getScreenCenter() : JKPoint
