@@ -17,7 +17,7 @@ class JKText extends JKSprite
 	var textFormat : TextFormat;
 	var textField : TextField;
 	
-	public function new( xPos : Float = 0, yPos : Float = 0, ?textWidth : Float, ?textHeight : Float, ?theText : String, theTextColor : Int = 0x000000, fontSize : Int = 10, alignment : TextFormatAlign = null, fontType : String, ?theLayer : DisplayObjectContainer ) 
+	public function new( xPos : Float = 0, yPos : Float = 0, ?textWidth : Float, ?textHeight : Float, ?theText : String, theTextColor : Int = 0x000000, fontSize : Int = 10, alignment : Dynamic = null, fontType : String, ?theLayer : DisplayObjectContainer ) 
 	{
 		layer = theLayer;
 		textField = new TextField();

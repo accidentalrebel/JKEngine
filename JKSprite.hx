@@ -255,7 +255,11 @@ class JKSprite extends JKObject
 		var ratio : JKPoint = new JKPoint();
 		ratio.x = newScreenSize.x / savedScreenSize.x;
 		ratio.y = newScreenSize.y / savedScreenSize.y;
-		trace(ratio.x + "," + ratio.y);
+		Lib.trace(ratio.x + "," + ratio.y);
+		
+		Lib.trace("before: " + x);
+		x = (x * ratio.x);
+		Lib.trace("after: " + x);
 	}
 	
 	/********************************************************************************
